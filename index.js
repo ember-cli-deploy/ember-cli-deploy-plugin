@@ -8,6 +8,13 @@ var DeployPluginBase = CoreObject.extend({
   project: null,
   pluginConfig: null,
   defaultConfig: {},
+  beforeHook: function(context) {
+    this.context = context;
+    this.ui = context.ui;
+    this.project = context.project;
+    context.config[this.name] = context.config[this.name] || {}
+    this.pluginConfig = context.config[this.name];
+  },
   configure: function(context) {
     this.log('validating config');
     var defaultProps = Object.keys(this.defaultConfig || {});
