@@ -24,7 +24,7 @@ var DeployPluginBase = CoreObject.extend({
     this.log('config ok');
   },
   applyDefaultConfigProperty: function(propertyName){
-    if (!this.pluginConfig[propertyName]) {
+    if (this.pluginConfig[propertyName] === undefined) {
       var value = this.defaultConfig[propertyName];
       this.pluginConfig[propertyName] = value;
       var description = value;
