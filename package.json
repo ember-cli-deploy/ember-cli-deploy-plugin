@@ -2,11 +2,11 @@
   "name": "ember-cli-deploy-plugin",
   "version": "0.1.3",
   "description": "For building plugins for ember-cli-deploy",
-  "repository": "https://github.com/lukemelia/ember-cli-deploy-plugin",
+  "repository": "https://github.com/ember-cli-deploy/ember-cli-deploy-plugin",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "Luke Melia",
+  "author": "Luke Melia and ember-cli-deploy team",
   "license": "MIT",
   "devDependencies": {
   },
