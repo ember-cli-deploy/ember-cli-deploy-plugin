@@ -43,8 +43,10 @@ module.exports = {
         var awesomeApiKey = this.readConfig('awesomeApiKey');
 
         // Use the `log` method to generate output consistent with the tree style
-        // of ember-cli-deploy
-        this.log('unleashing awesomeness');
+        // of ember-cli-deploy's verbose output
+        this.log('output some awesomeness');
+        this.log('output some red awesomeness', { color: 'red' });
+        this.log('output this only when verbose option is enabled', { verbose: true });
 
         // Need to do something async? You can return a promise.
         // Need to fail out? Throw an error or return a promise which becomes rejected

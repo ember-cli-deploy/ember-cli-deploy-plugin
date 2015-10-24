@@ -12,16 +12,16 @@ var DeployPluginBase = CoreObject.extend({
     this.context = context;
     this.ui = context.ui;
     this.project = context.project;
-    context.config[this.name] = context.config[this.name] || {}
+    context.config[this.name] = context.config[this.name] || {};
     this.pluginConfig = context.config[this.name];
   },
-  configure: function(context) {
-    this.log('validating config');
+  configure: function(/* context */) {
+    this.log('validating config', { verbose: true});
     var defaultProps = Object.keys(this.defaultConfig || {});
     defaultProps.forEach(this.applyDefaultConfigProperty.bind(this));
     var requiredProps = this.requiredConfig || [];
     requiredProps.forEach(this.ensureConfigPropertySet.bind(this));
-    this.log('config ok');
+    this.log('config ok', { verbose: true });
   },
   applyDefaultConfigProperty: function(propertyName){
     if (this.pluginConfig[propertyName] === undefined) {
@@ -31,7 +31,7 @@ var DeployPluginBase = CoreObject.extend({
       if (typeof description === "function") {
         description = "[Function]";
       }
-      this.log('Missing config: `' + propertyName + '`, using default: `' + description + '`', { color: 'yellow' });
+      this.log('Missing config: `' + propertyName + '`, using default: `' + description + '`', { color: 'yellow', verbose: true });
     }
   },
   ensureConfigPropertySet: function(propertyName){
@@ -49,12 +49,17 @@ var DeployPluginBase = CoreObject.extend({
     return configuredValue;
   },
   log: function(message, opts) {
-    opts = opts || { color: 'blue' }
-    opts['color'] = opts['color'] || 'blue';
+    opts = opts || { color: 'blue' };
+    opts.color = opts.color || 'blue';
+    var ui = this.ui;
 
-    this.ui.write(blue('|    '));
-    var chalkColor = chalk[opts.color];
-    this.ui.writeLine(chalkColor('- ' + message));
+    if (!opts.verbose || (opts.verbose && ui.verbose)) {
+      if (ui.verbose) {
+        ui.write(blue('|    '));
+      }
+      var chalkColor = chalk[opts.color];
+      ui.writeLine(chalkColor('- ' + message));
+    }
   }
 });
 
