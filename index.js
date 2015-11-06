@@ -2,6 +2,19 @@ var CoreObject     = require('core-object');
 var chalk = require('chalk');
 var blue  = chalk.blue;
 
+function configurationFactory(configurationBlueprint) {
+  if (!configurationBlueprint) { return; }
+
+  var config = {};
+  var keys = Object.keys(configurationBlueprint);
+
+  keys.forEach(function(key) {
+    config[key] = configurationBlueprint[key];
+  });
+
+  return config;
+}
+
 var DeployPluginBase = CoreObject.extend({
   context: null,
   ui: null,
@@ -12,7 +25,7 @@ var DeployPluginBase = CoreObject.extend({
     this.context = context;
     this.ui = context.ui;
     this.project = context.project;
-    context.config[this.name] = context.config[this.name] || {};
+    context.config[this.name] = configurationFactory(context.config[this.name]) || {};
     this.pluginConfig = context.config[this.name];
   },
   configure: function(/* context */) {
