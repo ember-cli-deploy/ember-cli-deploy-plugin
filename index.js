@@ -56,7 +56,12 @@ var DeployPluginBase = CoreObject.extend({
     if (!opts.verbose || (opts.verbose && ui.verbose)) {
       if (ui.verbose) {
         ui.write(blue('|    '));
+      } else if (ui.actualOutputStream && ui.actualOutputStream.cursorTo) {
+        // on a real terminal we want to reset the cursor position
+        // to avoid overlap with other outputs
+        ui.actualOutputStream.cursorTo(0);
       }
+
       var chalkColor = chalk[opts.color];
       ui.writeLine(chalkColor('- ' + message));
     }
