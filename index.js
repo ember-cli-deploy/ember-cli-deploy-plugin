@@ -59,6 +59,7 @@ var DeployPluginBase = CoreObject.extend({
       } else if (ui.actualOutputStream && ui.actualOutputStream.cursorTo) {
         // on a real terminal we want to reset the cursor position
         // to avoid overlap with other outputs
+        ui.actualOuputStream.clearLine();
         ui.actualOutputStream.cursorTo(0);
       }
 
