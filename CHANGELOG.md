@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.2.2](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.2) (2016-02-06)
+[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.1...0.2.2)
+
+- ember cli uses the wrong spelling from originalOutputStream [\#7](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/pull/7) ([ghedamat](https://github.com/ghedamat))
+
 ## [0.2.1](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.1) (2016-01-23)
 [Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.0...0.2.1)
 
