@@ -52,15 +52,17 @@ var DeployPluginBase = CoreObject.extend({
     opts = opts || { color: 'blue' };
     opts.color = opts.color || 'blue';
     var ui = this.ui;
+    // the following accomodates a spelling error in ember-cli
+    var actualStream = ui.actualOutputStream || ui.actualOuputStream;
 
     if (!opts.verbose || (opts.verbose && ui.verbose)) {
       if (ui.verbose) {
         ui.write(blue('|    '));
-      } else if (ui.actualOutputStream && ui.actualOutputStream.cursorTo) {
+      } else if (actualStream && actualStream.cursorTo) {
         // on a real terminal we want to reset the cursor position
         // to avoid overlap with other outputs
-        ui.actualOuputStream.clearLine();
-        ui.actualOutputStream.cursorTo(0);
+        actualStream.clearLine();
+        actualStream.cursorTo(0);
       }
 
       var chalkColor = chalk[opts.color];
