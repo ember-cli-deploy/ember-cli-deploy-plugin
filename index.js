@@ -48,6 +48,12 @@ var DeployPluginBase = CoreObject.extend({
     }
     return configuredValue;
   },
+
+  logRaw: function(message) {
+    var ui = this.ui;
+    ui.writeLine(message);
+  },
+
   log: function(message, opts) {
     opts = opts || { color: 'blue' };
     opts.color = opts.color || 'blue';
@@ -66,7 +72,7 @@ var DeployPluginBase = CoreObject.extend({
       }
 
       var chalkColor = chalk[opts.color];
-      ui.writeLine(chalkColor('- ' + message));
+      this.logRaw(chalkColor('- ' + message));
     }
   }
 });
