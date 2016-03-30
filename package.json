@@ -8,10 +8,10 @@
   },
   "author": "Luke Melia and ember-cli-deploy team",
   "license": "MIT",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "chalk": "^1.0.0",
-    "core-object": "0.0.2"
+    "core-object": "0.0.2",
+    "lodash": "^4.6.1"
   }
 }

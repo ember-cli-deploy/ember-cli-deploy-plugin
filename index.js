@@ -1,6 +1,6 @@
 var CoreObject     = require('core-object');
 var chalk = require('chalk');
-var blue  = chalk.blue;
+var _ = require('lodash-node');
 
 var DeployPluginBase = CoreObject.extend({
   context: null,
@@ -55,15 +55,17 @@ var DeployPluginBase = CoreObject.extend({
   },
 
   log: function(message, opts) {
-    opts = opts || { color: 'blue' };
-    opts.color = opts.color || 'blue';
+    opts = opts || {};
     var ui = this.ui;
+    var color = opts.color || ui.logInfoColor || 'blue';
+    var chalkColor = chalk[color];
+
     // the following accomodates a spelling error in ember-cli
     var actualStream = ui.actualOutputStream || ui.actualOuputStream;
 
     if (!opts.verbose || (opts.verbose && ui.verbose)) {
       if (ui.verbose) {
-        ui.write(blue('|    '));
+        ui.write(chalkColor('|    '));
       } else if (actualStream && actualStream.cursorTo) {
         // on a real terminal we want to reset the cursor position
         // to avoid overlap with other outputs
@@ -71,7 +73,6 @@ var DeployPluginBase = CoreObject.extend({
         actualStream.cursorTo(0);
       }
 
-      var chalkColor = chalk[opts.color];
       this.logRaw(chalkColor('- ' + message));
     }
   }
