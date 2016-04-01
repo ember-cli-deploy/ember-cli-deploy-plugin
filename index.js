@@ -1,6 +1,6 @@
 var CoreObject     = require('core-object');
 var chalk = require('chalk');
-var _ = require('lodash-node');
+var _ = require('lodash');
 
 var DeployPluginBase = CoreObject.extend({
   context: null,
