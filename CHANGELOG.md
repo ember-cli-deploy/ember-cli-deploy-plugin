@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.2.4](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.4) (2016-04-01)
+[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.3...0.2.4)
+
+Add support for upcoming log color configuration feature in ember-cli-deploy.
+
+- add logInfo color option [\#8](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/pull/8) ([ghedamat](https://github.com/ghedamat))
+
 ## [0.2.3](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.3) (2016-03-29)
 [Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.2...0.2.3)
 
