@@ -8,10 +8,21 @@
   },
   "author": "Luke Melia and ember-cli-deploy team",
   "license": "MIT",
-  "devDependencies": {},
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "ember server",
+    "build": "ember build",
+    "test": "node tests/runner.js"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "glob": "^7.0.3",
+    "mocha": "^2.2.4"
+  },
   "dependencies": {
     "chalk": "^1.0.0",
-    "core-object": "0.0.2",
-    "lodash": "^4.6.1"
+    "core-object": "0.0.2"
   }
 }
