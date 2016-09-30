@@ -43,7 +43,7 @@ var DeployPluginBase = CoreObject.extend({
   readConfig: function(property){
     var configuredValue = this.pluginConfig[property];
     if (typeof configuredValue === 'function') {
-      return configuredValue.call(this, this.context);
+      return configuredValue.call(this.pluginConfig, this.context);
     }
     return configuredValue;
   },
