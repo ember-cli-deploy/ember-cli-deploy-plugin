@@ -1,5 +1,18 @@
 var CoreObject     = require('core-object');
 var chalk = require('chalk');
+var merge = require('lodash.merge');
+
+function _pluginHelperDefaults() {
+  return {
+    readConfigDefault: function(property) {
+      var configuredValue = this.defaultConfig[property];
+      if (typeof configuredValue === 'function') {
+        return configuredValue.call(this, this.context);
+      }
+      return configuredValue;
+    }.bind(this)
+  };
+}
 
 var DeployPluginBase = CoreObject.extend({
   context: null,
@@ -43,7 +56,8 @@ var DeployPluginBase = CoreObject.extend({
   readConfig: function(property){
     var configuredValue = this.pluginConfig[property];
     if (typeof configuredValue === 'function') {
-      return configuredValue.call(this.pluginConfig, this.context);
+      var helper = merge(this.pluginHelper(this.context), _pluginHelperDefaults.call(this));
+      return configuredValue.call(this.pluginConfig, this.context, helper);
     }
     return configuredValue;
   },
@@ -74,6 +88,10 @@ var DeployPluginBase = CoreObject.extend({
 
       this.logRaw(chalkColor('- ' + message));
     }
+  },
+
+  pluginHelper: function(/*context*/) {
+    return {};
   }
 });
 
