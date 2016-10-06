@@ -34,6 +34,16 @@ module.exports = {
       },
       requiredConfig: ['awesomeApiKey'], // throw an error if this is not configured
 
+      // return an object from here to add functionality to the `pluginHelper`
+      // that is passed in to user defined config property functions
+      pluginHelper: function(context) {
+        return {
+          sayHello: function() {
+            return 'Hello' + context.project.name();
+          }
+        };
+      },
+
       // implement any hooks appropriate for your plugin
       willUpload: function(context) {
         // Use the `readConfig` method for uniform access to this plugin's config,
