@@ -1,15 +1,15 @@
 var CoreObject     = require('core-object');
 var chalk = require('chalk');
-var merge = require('lodash.merge');
+var cloneDeep = require('lodash.clonedeep');
 
-function _pluginHelperDefaults() {
+function _pluginHelper() {
   return {
     readConfigDefault: function(property) {
       var configuredValue = this.defaultConfig[property];
       if (typeof configuredValue === 'function') {
-        return configuredValue.call(this, this.context);
+        return cloneDeep(configuredValue.call(this, this.context));
       }
-      return configuredValue;
+      return cloneDeep(configuredValue);
     }.bind(this)
   };
 }
@@ -56,8 +56,7 @@ var DeployPluginBase = CoreObject.extend({
   readConfig: function(property){
     var configuredValue = this.pluginConfig[property];
     if (typeof configuredValue === 'function') {
-      var helper = merge(this.pluginHelper(this.context), _pluginHelperDefaults.call(this));
-      return configuredValue.call(this.pluginConfig, this.context, helper);
+      return configuredValue.call(this.pluginConfig, this.context, _pluginHelper.call(this));
     }
     return configuredValue;
   },
@@ -88,10 +87,6 @@ var DeployPluginBase = CoreObject.extend({
 
       this.logRaw(chalkColor('- ' + message));
     }
-  },
-
-  pluginHelper: function(/*context*/) {
-    return {};
   }
 });
 

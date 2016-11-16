@@ -75,63 +75,30 @@ describe('base plugin', function() {
   describe('plugin helper', function() {
     it('provides access to the oringal default values', function() {
       var Plugin = Subject.extend({
-        requiredConfig: ['bar'],
         defaultConfig: {
-          foo: function(context) {
-            return context.foo;
-          }
+          distFiles: ['index.html', 'assets/logo.png']
         }
       });
 
       var plugin = new Plugin({
-        name: 'blah'
+        name: 'build'
       });
 
       var context = {
-        foo: 'foo',
         config: {
-          blah: {
-            foo: function(context, pluginHelper) {
-              return pluginHelper.readConfigDefault('foo') + 'foo';
-            },
-            bar: function(context, pluginHelper) {
-              return pluginHelper.readConfigDefault('bar') + 'bar';
+          build: {
+            distFiles: function(context, pluginHelper) {
+              var arr = pluginHelper.readConfigDefault('distFiles');
+              arr.push('index.json');
+              return arr;
             }
           }
         }
       };
 
       plugin.beforeHook(context);
-      assert.equal(plugin.readConfig('foo'), 'foofoo');
-      assert.equal(plugin.readConfig('bar'), 'undefinedbar');
-    });
-
-    it('allows the implementer to add things to the pluginHelper', function() {
-      var Plugin = Subject.extend({
-        defaultConfig: { foo: 'foo' }
-      });
-
-      var plugin = new Plugin({
-        name: 'blah',
-
-        pluginHelper: function(context) {
-          return { bar: context.foo };
-        }
-      });
-
-      var context = {
-        foo: 'bar',
-        config: {
-          blah: {
-            foo: function(context, pluginHelper) {
-              return pluginHelper.readConfigDefault('foo') + pluginHelper.bar;
-            }
-          }
-        }
-      };
-
-      plugin.beforeHook(context);
-      assert.equal(plugin.readConfig('foo'), 'foobar');
+      assert.deepEqual(plugin.defaultConfig.distFiles, ['index.html', 'assets/logo.png']);
+      assert.deepEqual(plugin.readConfig('distFiles'), ['index.html', 'assets/logo.png', 'index.json']);
     });
   });
 });
