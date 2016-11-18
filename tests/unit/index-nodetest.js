@@ -76,7 +76,72 @@ describe('base plugin', function() {
     it('provides access to the oringal default values', function() {
       var Plugin = Subject.extend({
         defaultConfig: {
-          distFiles: ['index.html', 'assets/logo.png']
+          distFiles: ['index.html', 'assets/logo.png'],
+          jsonBlueprint: {
+            link: {
+              selector: 'link',
+              attributes: ['rel', 'href']
+            },
+          },
+          git: {
+            sha: function() {
+              return '1';
+            }
+          },
+          revisionKey: function(context) {
+            return context.revisionData.revisionKey;
+          }
+        }
+      });
+
+      var plugin = new Plugin({
+        name: 'build'
+      });
+
+      var context = {
+        revisionData: { revisionKey: '111' },
+        config: {
+          build: {
+            distFiles: function(context, pluginHelper) {
+              var arr = pluginHelper.readConfigDefault('distFiles');
+              arr.push('index.json');
+              return arr;
+            },
+            jsonBlueprint: function(context, pluginHelper) {
+              var blueprint = pluginHelper.readConfigDefault('jsonBlueprint');
+              blueprint.link.attributes.push('integrity');
+
+              return blueprint;
+            },
+            sha: function(context, pluginHelper) {
+              var git = pluginHelper.readConfigDefault('git');
+
+              return git.sha() + '2';
+            },
+            revisionKey: function(context, pluginHelper) {
+              return pluginHelper.readConfigDefault('revisionKey') + '222';
+            }
+          }
+        }
+      };
+
+      plugin.beforeHook(context);
+      assert.deepEqual(plugin.readConfig('distFiles'), ['index.html', 'assets/logo.png', 'index.json']);
+      assert.deepEqual(plugin.readConfig('jsonBlueprint').link.attributes, ['rel', 'href', 'integrity']);
+      assert.equal(plugin.readConfig('sha'), '12');
+      assert.equal(plugin.readConfig('revisionKey'), '111222');
+    });
+
+    it('ensures default values do not get mutated', function() {
+      var Plugin = Subject.extend({
+        defaultConfig: {
+          distFiles: ['index.html', 'assets/logo.png'],
+          jsonBlueprint: {
+            link: {
+              selector: 'link',
+              attributes: ['rel', 'href']
+            }
+          }
         }
       });
 
@@ -91,14 +156,23 @@ describe('base plugin', function() {
               var arr = pluginHelper.readConfigDefault('distFiles');
               arr.push('index.json');
               return arr;
+            },
+            jsonBlueprint: function(context, pluginHelper) {
+              var blueprint = pluginHelper.readConfigDefault('jsonBlueprint');
+              blueprint.link.attributes.push('integrity');
+
+              return blueprint;
             }
           }
         }
       };
 
       plugin.beforeHook(context);
+      plugin.readConfig('distFiles')
+      plugin.readConfig('jsonBlueprint')
+
       assert.deepEqual(plugin.defaultConfig.distFiles, ['index.html', 'assets/logo.png']);
-      assert.deepEqual(plugin.readConfig('distFiles'), ['index.html', 'assets/logo.png', 'index.json']);
-    });
+      assert.deepEqual(plugin.defaultConfig.jsonBlueprint.link.attributes, ['rel', 'href']);
+    })
   });
 });
