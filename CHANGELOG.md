@@ -1,7 +1,14 @@
 # Change Log
 
-## [0.2.6](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.6) (2016-04-19)
-[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.5...0.2.6)
+## [0.2.7](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.7) (2016-11-21)
+[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.6...0.2.7)
+
+**Merged pull requests:**
+
+- Add plugin helper [\#15](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/pull/15) ([achambers](https://github.com/achambers))
+
+## [v0.2.6](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/v0.2.6) (2016-04-19)
+[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.5...v0.2.6)
 
 **Merged pull requests:**
 
@@ -37,11 +44,6 @@
 
 ## [v0.2.1](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/v0.2.1) (2016-01-24)
 [Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.0...v0.2.1)
-
-**Closed issues:**
-
-- Can't list or activate revisions [\#5](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/issues/5)
-- No repository field [\#4](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/issues/4)
 
 **Merged pull requests:**
 
