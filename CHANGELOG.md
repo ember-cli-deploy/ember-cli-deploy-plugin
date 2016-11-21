@@ -1,7 +1,14 @@
 # Change Log
 
-## [0.2.8](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.8) (2016-11-21)
-[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.7...0.2.8)
+## [0.2.9](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.9) (2016-11-21)
+[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.8...0.2.9)
+
+**Merged pull requests:**
+
+- Add  function to pluginHelper [\#17](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/pull/17) ([achambers](https://github.com/achambers))
+
+## [v0.2.8](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/v0.2.8) (2016-11-21)
+[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.7...v0.2.8)
 
 **Merged pull requests:**
 
