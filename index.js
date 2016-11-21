@@ -10,6 +10,10 @@ function _pluginHelper() {
         return cloneDeep(configuredValue.call(this, this.context));
       }
       return cloneDeep(configuredValue);
+    }.bind(this),
+
+    readConfig: function(property) {
+      return cloneDeep(this.readConfig(property));
     }.bind(this)
   };
 }

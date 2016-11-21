@@ -21,7 +21,8 @@ describe('base plugin', function() {
       },
       writeLine: function(message) {
         this.messages.push(message);
-      }
+      },
+      logInfoColor: 'blue'
     };
   });
 
@@ -174,5 +175,70 @@ describe('base plugin', function() {
       assert.deepEqual(plugin.defaultConfig.distFiles, ['index.html', 'assets/logo.png']);
       assert.deepEqual(plugin.defaultConfig.jsonBlueprint.link.attributes, ['rel', 'href']);
     })
+
+    it('provides the ability to read the plugin config', function() {
+      var Plugin = Subject.extend({
+        defaultConfig: {
+          port: function() {
+            return 1234;
+          },
+          host: 'foo.com'
+        }
+      });
+
+      var plugin = new Plugin({
+        name: 'build'
+      });
+
+      var context = {
+        ui: mockUi,
+        config: {
+          build: {
+            username: 'bar',
+            options: function(context, pluginHelper) {
+              return {
+                port: pluginHelper.readConfig('port'),
+                host: pluginHelper.readConfig('host'),
+                username: pluginHelper.readConfig('username')
+              };
+            }
+          }
+        }
+      };
+
+      plugin.beforeHook(context);
+      plugin.configure(context);
+
+      assert.deepEqual(plugin.readConfig('options'), { port: 1234, host: 'foo.com', username: 'bar' });
+    });
+
+    it('doesn\'t mutate the original plugin config', function() {
+      var Plugin = Subject.extend({
+        defaultConfig: { }
+      });
+
+      var plugin = new Plugin({
+        name: 'build'
+      });
+
+      var context = {
+        ui: mockUi,
+        config: {
+          build: {
+            tags: ['foo'],
+            options: function(context, pluginHelper) {
+              var tags = pluginHelper.readConfig('tags');
+              tags.push('bar');
+              return { tags: tags };
+            }
+          }
+        }
+      };
+
+      plugin.beforeHook(context);
+      plugin.configure(context);
+
+      assert.deepEqual(plugin.readConfig('options'), { tags: ['foo', 'bar']});
+    });
   });
 });
