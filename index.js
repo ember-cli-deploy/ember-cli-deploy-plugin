@@ -1,5 +1,18 @@
 var CoreObject     = require('core-object');
 var chalk = require('chalk');
+var cloneDeep = require('lodash.clonedeep');
+
+function _pluginHelper() {
+  return {
+    readConfigDefault: function(property) {
+      var configuredValue = this.defaultConfig[property];
+      if (typeof configuredValue === 'function') {
+        return cloneDeep(configuredValue.call(this, this.context));
+      }
+      return cloneDeep(configuredValue);
+    }.bind(this)
+  };
+}
 
 var DeployPluginBase = CoreObject.extend({
   context: null,
@@ -43,7 +56,7 @@ var DeployPluginBase = CoreObject.extend({
   readConfig: function(property){
     var configuredValue = this.pluginConfig[property];
     if (typeof configuredValue === 'function') {
-      return configuredValue.call(this, this.context);
+      return configuredValue.call(this.pluginConfig, this.context, _pluginHelper.call(this));
     }
     return configuredValue;
   },
