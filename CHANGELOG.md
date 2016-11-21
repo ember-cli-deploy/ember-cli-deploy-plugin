@@ -1,7 +1,16 @@
 # Change Log
 
-## [0.2.7](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.7) (2016-11-21)
-[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.6...0.2.7)
+## [0.2.8](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/0.2.8) (2016-11-21)
+[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.7...0.2.8)
+
+**Merged pull requests:**
+
+- Update core-object & mocha. [\#16](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/pull/16) ([lukemelia](https://github.com/lukemelia))
+
+## [v0.2.7](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/tree/v0.2.7) (2016-11-21)
+[Full Changelog](https://github.com/ember-cli-deploy/ember-cli-deploy-plugin/compare/v0.2.6...v0.2.7)
+
+[BREAKING] This release changes the context of `this` within a user-defined config property function from the base plugin itself to the surrounding config object. This behavior was previously inconsistent.
 
 **Merged pull requests:**
 
