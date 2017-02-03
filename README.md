@@ -30,6 +30,9 @@ module.exports = {
         someKey: 'defaultValue',
         anotherKey: function(context) {
           return context.anotherKey; // to use data added to the context by another plugin
+        },
+        capsKey: function(context, pluginHelper) {
+          return pluginHelper.readConfig('someKey').toUppercase(); // pluginHelper.readConfig returns a clone of the specified config value
         }
       },
       requiredConfig: ['awesomeApiKey'], // throw an error if this is not configured
@@ -56,7 +59,3 @@ module.exports = {
     return new DeployPlugin();
   }
 };
-
-## TODO
-
-Tests
