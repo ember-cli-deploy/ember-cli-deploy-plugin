@@ -34,6 +34,14 @@ describe('base plugin', function() {
     assert.equal(plugin.name, 'test-plugin');
   });
 
+  it('errors when no name is set', function() {
+    var makePluginWithNoName = function() {
+      new Subject();
+    };
+
+    assert.throws(makePluginWithNoName, /missing name/);
+  });
+
   describe('log', function() {
 
     it('logs raw', function() {
