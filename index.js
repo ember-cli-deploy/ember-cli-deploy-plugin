@@ -24,6 +24,12 @@ var DeployPluginBase = CoreObject.extend({
   project: null,
   pluginConfig: null,
   defaultConfig: {},
+  init: function() {
+    this._super.init.apply(this, arguments);
+    if (!this.name) {
+      throw new Error('Plugin is missing name property');
+    }
+  },
   beforeHook: function(context) {
     this.context = context;
     this.ui = context.ui;
